@@ -3,15 +3,17 @@ import pandas as pd
 
 # Create a DataFrame to store vending inventory for multiple locations
 locations = ['Location 1', 'Location 2', 'Location 3']
-location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price']) for location in locations}
+location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
 # Function to add items to the inventory
-def add_item(location, name, quantity, price):
+def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
     location_inventory[location] = location_inventory[location].append({
         'Item Name': name,
         'Quantity': quantity,
-        'Price': price
+        'Price': price,
+        'Cost': cost,
+        'Profit': profit
     }, ignore_index=True)
 
 # Function to edit item quantity in the inventory
@@ -33,6 +35,16 @@ def calculate_revenue(location):
     revenue = (location_inventory[location]['Quantity'] * location_inventory[location]['Price']).sum()
     return revenue
 
+# Function to calculate total cost for a specific location
+def calculate_cost(location):
+    cost = (location_inventory[location]['Quantity'] * location_inventory[location]['Cost']).sum()
+    return cost
+
+# Function to calculate total profit for a specific location
+def calculate_profit(location):
+    profit = (location_inventory[location]['Quantity'] * location_inventory[location]['Profit']).sum()
+    return profit
+
 # Sidebar for managing locations and adding/editing items
 def location_management():
     st.sidebar.header('Manage Locations')
@@ -42,9 +54,11 @@ def location_management():
     item_name = st.sidebar.text_input('Item Name')
     item_quantity = st.sidebar.number_input('Quantity', min_value=0)
     item_price = st.sidebar.number_input('Price', min_value=0.0)
+    item_cost = st.sidebar.number_input('Cost', min_value=0.0)
+    item_profit = st.sidebar.number_input('Profit', min_value=0.0)
 
     if st.sidebar.button('Add Item'):
-        add_item(selected_location, item_name, item_quantity, item_price)
+        add_item(selected_location, item_name, item_quantity, item_price, item_cost, item_profit)
         st.success('Item added successfully!')
 
     st.sidebar.write('---')
@@ -64,56 +78,45 @@ def location_management():
         delete_item(selected_location, item_index)
         st.success('Item deleted successfully!')
 
-    # Main section to display inventory and revenue
+    # Main section to display inventory, revenue, cost, and profit
     st.header(f'{selected_location} Inventory')
     show_inventory(selected_location)
 
     revenue = calculate_revenue(selected_location)
     st.write(f'Revenue: ${revenue:.2f}')
 
-# Adding a to-do checklist page
-def to_do_list():
-    st.sidebar.header('To-Do List')
+    cost = calculate_cost(selected_location)
+    st.write(f'Cost: ${cost:.2f}')
 
-    # Create an empty list to store tasks
-    tasks = []
+    profit = calculate_profit(selected_location)
+    st.write(f'Profit: ${profit:.2f}')
 
-    # Function to add tasks to the to-do list
-    def add_task(task):
-        global tasks
-        tasks.append(task)
+# Function to add tasks to the to-do list
+def add_task(task):
+    global tasks
+    tasks.append(task)
 
-    # Function to delete a task from the to-do list
-    def delete_task(task_index):
-        global tasks
-        del tasks[task_index]
+# Function to delete a task from the to-do list
+def delete_task(task_index):
+    global tasks
+    del tasks[task_index]
 
-    # Function to display the to-do list
-    def show_tasks():
-        st.write('## To-Do List')
-        for i, task in enumerate(tasks):
-            st.write(f'{i+1}. {task}')
+# Function to display the to-do list
+def show_tasks():
+    st.write('## To-Do List')
+    for i, task in enumerate(tasks):
+        st.write(f'{i+1}. {task}')
 
-    # Sidebar for adding tasks
-    task_input = st.sidebar.text_input('Add Task')
-    if st.sidebar.button('Add Task'):
-        add_task(task_input)
-        st.success('Task added successfully!')
+# Adding tasks to the to-do list
+tasks = ['Task 1: Finish project report', 'Task 2: Call client for follow-up', 'Task 3: Attend team meeting']
 
-    # Displaying the to-do list page
-    show_tasks()
-
-    # Functionality to delete tasks
-    task_to_delete = st.sidebar.selectbox('Select Task to Delete', tasks, key='delete_task')
-    if st.sidebar.button('Delete Task'):
-        task_index = tasks.index(task_to_delete)
-        delete_task(task_index)
-        st.success('Task deleted successfully!')
+# Adding 25 product examples to the inventory
+for i in range(25):
+    add_item('Location 1', f'Product {i + 1}', 100, 10.0, 7.0, 3.0)
 
 # Main navigation
 pages = {
-    'Vending Inventory': location_management,
-    'To-Do List': to_do_list
+    'Vending Inventory': location_management
 }
 
 # Display the selected page based on the sidebar selection
