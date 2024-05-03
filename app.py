@@ -5,129 +5,25 @@ import pandas as pd
 locations = ['Location 1', 'Location 2', 'Location 3', 'Location 4', 'Location 5', 'Location 6', 'Location 7', 'Location 8', 'Location 9', 'Location 10']
 location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
-# Demo inventory items
-demo_items = [
-    ('Location 1', 'Kit Kat', 20, 1.5, 0.75, 0.75),
-    ('Location 1', 'Doritos', 15, 2.0, 1.0, 1.0),
-    ('Location 1', 'Snickers', 10, 1.75, 0.85, 0.90),
-    ('Location 1', 'Coca-Cola', 30, 1.0, 0.50, 0.50),
-    ('Location 1', 'M&M\'s', 25, 1.25, 0.60, 0.65),
-    ('Location 1', 'Pringles', 18, 1.75, 0.90, 0.85),
-    ('Location 1', 'Skittles', 22, 1.25, 0.60, 0.65),
-    ('Location 1', 'Twix', 12, 1.75, 0.85, 0.90),
-    ('Location 1', 'Pepsi', 28, 1.0, 0.50, 0.50),
-    # Add more items for Location 1...
-
-    ('Location 2', 'Ruffles', 20, 2.25, 1.10, 1.15),
-    ('Location 2', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 2', 'Fritos', 10, 1.75, 0.85, 0.90),
-    ('Location 2', 'Mountain Dew', 30, 1.25, 0.60, 0.65),
-    ('Location 2', 'Milky Way', 25, 1.75, 0.85, 0.90),
-    ('Location 2', 'Lay\'s', 18, 2.0, 1.0, 1.0),
-    ('Location 2', 'Reese\'s', 22, 1.50, 0.75, 0.75),
-    ('Location 2', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
-    ('Location 2', 'Twizzlers', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 2...
-
-    ('Location 3', 'Cheetos', 20, 1.75, 0.85, 0.90),
-    ('Location 3', 'Mars Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 3', 'Sprite', 10, 1.0, 0.50, 0.50),
-    ('Location 3', 'Nestle Crunch', 30, 1.25, 0.60, 0.65),
-    ('Location 3', 'Gummy Bears', 25, 1.50, 0.75, 0.75),
-    ('Location 3', 'Sun Chips', 18, 2.0, 1.0, 1.0),
-    ('Location 3', 'Butterfinger', 22, 1.75, 0.85, 0.90),
-    ('Location 3', 'Fanta', 15, 1.25, 0.60, 0.65),
-    ('Location 3', 'Starburst', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 3...
-
-    ('Location 4', 'Snapple', 20, 1.75, 0.85, 0.90),
-    ('Location 4', 'Oreo', 16, 1.85, 0.90, 0.95),
-    ('Location 4', '7UP', 10, 1.0, 0.50, 0.50),
-    ('Location 4', 'Hershey\'s Kisses', 30, 1.25, 0.60, 0.65),
-    ('Location 4', 'Twix', 25, 1.50, 0.75, 0.75),
-    ('Location 4', 'Lay\'s', 18, 2.0, 1.0, 1.0),
-    ('Location 4', 'Skittles', 22, 1.75, 0.85, 0.90),
-    ('Location 4', 'Mountain Dew', 15, 1.25, 0.60, 0.65),
-    ('Location 4', 'Milky Way', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 4...
-
-    ('Location 5', 'Doritos', 20, 2.25, 1.10, 1.15),
-    ('Location 5', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 5', 'Fritos', 10, 1.75, 0.85, 0.90),
-    ('Location 5', 'Coca-Cola', 30, 1.25, 0.60, 0.65),
-    ('Location 5', 'M&M\'s', 25, 1.75, 0.85, 0.90),
-    ('Location 5', 'Pringles', 18, 1.75, 0.90, 0.85),
-    ('Location 5', 'Skittles', 22, 1.25, 0.60, 0.65),
-    ('Location 5', 'Twix', 12, 1.75, 0.85, 0.90),
-    ('Location 5', 'Pepsi', 28, 1.0, 0.50, 0.50),
-    # Add more items for Location 5...
-
-    ('Location 6', 'Ruffles', 20, 2.25, 1.10, 1.15),
-    ('Location 6', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 6', 'Fritos', 10, 1.75, 0.85, 0.90),
-    ('Location 6', 'Mountain Dew', 30, 1.25, 0.60, 0.65),
-    ('Location 6', 'Milky Way', 25, 1.75, 0.85, 0.90),
-    ('Location 6', 'Lay\'s', 18, 2.0, 1.0, 1.0),
-    ('Location 6', 'Reese\'s', 22, 1.50, 0.75, 0.75),
-    ('Location 6', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
-    ('Location 6', 'Twizzlers', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 6...
-
-    ('Location 7', 'Cheetos', 20, 1.75, 0.85, 0.90),
-    ('Location 7', 'Mars Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 7', 'Sprite', 10, 1.0, 0.50, 0.50),
-    ('Location 7', 'Nestle Crunch', 30, 1.25, 0.60, 0.65),
-    ('Location 7', 'Gummy Bears', 25, 1.50, 0.75, 0.75),
-    ('Location 7', 'Sun Chips', 18, 2.0, 1.0, 1.0),
-    ('Location 7', 'Butterfinger', 22, 1.75, 0.85, 0.90),
-    ('Location 7', 'Fanta', 15, 1.25, 0.60, 0.65),
-    ('Location 7', 'Starburst', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 7...
-
-    ('Location 8', 'Snapple', 20, 1.75, 0.85, 0.90),
-    ('Location 8', 'Oreo', 16, 1.85, 0.90, 0.95),
-    ('Location 8', '7UP', 10, 1.0, 0.50, 0.50),
-    ('Location 8', 'Hershey\'s Kisses', 30, 1.25, 0.60, 0.65),
-    ('Location 8', 'Twix', 25, 1.50, 0.75, 0.75),
-    ('Location 8', 'Lay\'s', 18, 2.0, 1.0, 1.0),
-    ('Location 8', 'Skittles', 22, 1.75, 0.85, 0.90),
-    ('Location 8', 'Mountain Dew', 15, 1.25, 0.60, 0.65),
-    ('Location 8', 'Milky Way', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 8...
-
-    ('Location 9', 'Doritos', 20, 2.25, 1.10, 1.15),
-    ('Location 9', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 9', 'Fritos', 10, 1.75, 0.85, 0.90),
-    ('Location 9', 'Coca-Cola', 30, 1.25, 0.60, 0.65),
-    ('Location 9', 'M&M\'s', 25, 1.75, 0.85, 0.90),
-    ('Location 9', 'Pringles', 18, 1.75, 0.90, 0.85),
-    ('Location 9', 'Skittles', 22, 1.25, 0.60, 0.65),
-    ('Location 9', 'Twix', 12, 1.75, 0.85, 0.90),
-    ('Location 9', 'Pepsi', 28, 1.0, 0.50, 0.50),
-    # Add more items for Location 9...
-
-    ('Location 10', 'Ruffles', 20, 2.25, 1.10, 1.15),
-    ('Location 10', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
-    ('Location 10', 'Fritos', 10, 1.75, 0.85, 0.90),
-    ('Location 10', 'Mountain Dew', 30, 1.25, 0.60, 0.65),
-    ('Location 10', 'Milky Way', 25, 1.75, 0.85, 0.90),
-    ('Location 10', 'Lay\'s', 18, 2.0, 1.0, 1.0),
-    ('Location 10', 'Reese\'s', 22, 1.50, 0.75, 0.75),
-    ('Location 10', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
-    ('Location 10', 'Twizzlers', 12, 1.0, 0.50, 0.50),
-    # Add more items for Location 10...
+snacks = [
+    'Kit Kat', 'Doritos', 'Snickers', 'Coca-Cola', 'M&M\'s', 'Pringles', 'Skittles', 'Twix', 'Pepsi',
+    'Ruffles', 'Hershey\'s Bar', 'Fritos', 'Mountain Dew', 'Milky Way', 'Lay\'s', 'Reese\'s', 'Dr. Pepper', 'Twizzlers',
+    'Cheetos', 'Mars Bar', 'Sprite', 'Nestle Crunch', 'Gummy Bears', 'Sun Chips', 'Butterfinger', 'Fanta', 'Starburst',
+    'Snapple', 'Oreo', '7UP', 'Hershey\'s Kisses'
 ]
 
-for item in demo_items:
-    item_dict = {
-        'Item Name': item[1],
-        'Quantity': item[2],
-        'Price': item[3],
-        'Cost': item[4],
-        'Profit': item[5]
-    }
-    location_inventory[item[0]] = pd.concat([location_inventory[item[0]], pd.DataFrame([item_dict])], ignore_index=True)
+# Generate demo_items for all locations
+demo_items = []
+for location in locations:
+    for snack in snacks:
+        demo_items.append((location, snack, 20, 1.5, 0.75, 0.75))  # You can adjust the quantities and prices as needed
 
+# Displaying the first few items for Location 1 as an example
+for item in demo_items:
+    if item[0] == 'Location 1':
+        print(item)
+    else:
+        break  # To avoid printing all items for brevity
 # Function to add items to the inventory
 def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
