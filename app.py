@@ -63,33 +63,42 @@ def location_management():
 
     st.sidebar.write('---')
     st.sidebar.header('Edit Item Quantity')
-    selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
-    new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
-    if st.sidebar.button('Edit Quantity'):
-        item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == selected_item].index[0]
-        edit_item(selected_location, item_index, new_quantity)
-        st.success('Quantity updated successfully!')
+    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
+        selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
+        new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
+        if st.sidebar.button('Edit Quantity'):
+            item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == selected_item].index[0]
+            edit_item(selected_location, item_index, new_quantity)
+            st.success('Quantity updated successfully!')
+    else:
+        st.sidebar.warning('No items in inventory.')
 
     st.sidebar.write('---')
     st.sidebar.header('Delete Item')
-    item_to_delete = st.sidebar.selectbox('Select Item to Delete', location_inventory[selected_location]['Item Name'].tolist())
-    if st.sidebar.button('Delete Item'):
-        item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == item_to_delete].index[0]
-        delete_item(selected_location, item_index)
-        st.success('Item deleted successfully!')
+    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
+        item_to_delete = st.sidebar.selectbox('Select Item to Delete', location_inventory[selected_location]['Item Name'].tolist())
+        if st.sidebar.button('Delete Item'):
+            item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == item_to_delete].index[0]
+            delete_item(selected_location, item_index)
+            st.success('Item deleted successfully!')
+    else:
+        st.sidebar.warning('No items in inventory.')
 
     # Main section to display inventory, revenue, cost, and profit
     st.header(f'{selected_location} Inventory')
-    show_inventory(selected_location)
+    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
+        show_inventory(selected_location)
 
-    revenue = calculate_revenue(selected_location)
-    st.write(f'Revenue: ${revenue:.2f}')
+        revenue = calculate_revenue(selected_location)
+        st.write(f'Revenue: ${revenue:.2f}')
 
-    cost = calculate_cost(selected_location)
-    st.write(f'Cost: ${cost:.2f}')
+        cost = calculate_cost(selected_location)
+        st.write(f'Cost: ${cost:.2f}')
 
-    profit = calculate_profit(selected_location)
-    st.write(f'Profit: ${profit:.2f}')
+        profit = calculate_profit(selected_location)
+        st.write(f'Profit: ${profit:.2f}')
+    else:
+        st.warning('No items in inventory.')
 
 # Function to add tasks to the to-do list
 def add_task(task):
