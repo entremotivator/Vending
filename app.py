@@ -16,6 +16,8 @@ demo_items = [
     ('Location 1', 'Skittles', 22, 1.25, 0.60, 0.65),
     ('Location 1', 'Twix', 12, 1.75, 0.85, 0.90),
     ('Location 1', 'Pepsi', 28, 1.0, 0.50, 0.50),
+    # Add more items for Location 1...
+
     ('Location 2', 'Ruffles', 20, 2.25, 1.10, 1.15),
     ('Location 2', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
     ('Location 2', 'Fritos', 10, 1.75, 0.85, 0.90),
@@ -25,6 +27,8 @@ demo_items = [
     ('Location 2', 'Reese\'s', 22, 1.50, 0.75, 0.75),
     ('Location 2', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
     ('Location 2', 'Twizzlers', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 2...
+
     ('Location 3', 'Cheetos', 20, 1.75, 0.85, 0.90),
     ('Location 3', 'Mars Bar', 16, 1.85, 0.90, 0.95),
     ('Location 3', 'Sprite', 10, 1.0, 0.50, 0.50),
@@ -34,6 +38,84 @@ demo_items = [
     ('Location 3', 'Butterfinger', 22, 1.75, 0.85, 0.90),
     ('Location 3', 'Fanta', 15, 1.25, 0.60, 0.65),
     ('Location 3', 'Starburst', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 3...
+
+    ('Location 4', 'Snapple', 20, 1.75, 0.85, 0.90),
+    ('Location 4', 'Oreo', 16, 1.85, 0.90, 0.95),
+    ('Location 4', '7UP', 10, 1.0, 0.50, 0.50),
+    ('Location 4', 'Hershey\'s Kisses', 30, 1.25, 0.60, 0.65),
+    ('Location 4', 'Twix', 25, 1.50, 0.75, 0.75),
+    ('Location 4', 'Lay\'s', 18, 2.0, 1.0, 1.0),
+    ('Location 4', 'Skittles', 22, 1.75, 0.85, 0.90),
+    ('Location 4', 'Mountain Dew', 15, 1.25, 0.60, 0.65),
+    ('Location 4', 'Milky Way', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 4...
+
+    ('Location 5', 'Doritos', 20, 2.25, 1.10, 1.15),
+    ('Location 5', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
+    ('Location 5', 'Fritos', 10, 1.75, 0.85, 0.90),
+    ('Location 5', 'Coca-Cola', 30, 1.25, 0.60, 0.65),
+    ('Location 5', 'M&M\'s', 25, 1.75, 0.85, 0.90),
+    ('Location 5', 'Pringles', 18, 1.75, 0.90, 0.85),
+    ('Location 5', 'Skittles', 22, 1.25, 0.60, 0.65),
+    ('Location 5', 'Twix', 12, 1.75, 0.85, 0.90),
+    ('Location 5', 'Pepsi', 28, 1.0, 0.50, 0.50),
+    # Add more items for Location 5...
+
+    ('Location 6', 'Ruffles', 20, 2.25, 1.10, 1.15),
+    ('Location 6', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
+    ('Location 6', 'Fritos', 10, 1.75, 0.85, 0.90),
+    ('Location 6', 'Mountain Dew', 30, 1.25, 0.60, 0.65),
+    ('Location 6', 'Milky Way', 25, 1.75, 0.85, 0.90),
+    ('Location 6', 'Lay\'s', 18, 2.0, 1.0, 1.0),
+    ('Location 6', 'Reese\'s', 22, 1.50, 0.75, 0.75),
+    ('Location 6', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
+    ('Location 6', 'Twizzlers', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 6...
+
+    ('Location 7', 'Cheetos', 20, 1.75, 0.85, 0.90),
+    ('Location 7', 'Mars Bar', 16, 1.85, 0.90, 0.95),
+    ('Location 7', 'Sprite', 10, 1.0, 0.50, 0.50),
+    ('Location 7', 'Nestle Crunch', 30, 1.25, 0.60, 0.65),
+    ('Location 7', 'Gummy Bears', 25, 1.50, 0.75, 0.75),
+    ('Location 7', 'Sun Chips', 18, 2.0, 1.0, 1.0),
+    ('Location 7', 'Butterfinger', 22, 1.75, 0.85, 0.90),
+    ('Location 7', 'Fanta', 15, 1.25, 0.60, 0.65),
+    ('Location 7', 'Starburst', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 7...
+
+    ('Location 8', 'Snapple', 20, 1.75, 0.85, 0.90),
+    ('Location 8', 'Oreo', 16, 1.85, 0.90, 0.95),
+    ('Location 8', '7UP', 10, 1.0, 0.50, 0.50),
+    ('Location 8', 'Hershey\'s Kisses', 30, 1.25, 0.60, 0.65),
+    ('Location 8', 'Twix', 25, 1.50, 0.75, 0.75),
+    ('Location 8', 'Lay\'s', 18, 2.0, 1.0, 1.0),
+    ('Location 8', 'Skittles', 22, 1.75, 0.85, 0.90),
+    ('Location 8', 'Mountain Dew', 15, 1.25, 0.60, 0.65),
+    ('Location 8', 'Milky Way', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 8...
+
+    ('Location 9', 'Doritos', 20, 2.25, 1.10, 1.15),
+    ('Location 9', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
+    ('Location 9', 'Fritos', 10, 1.75, 0.85, 0.90),
+    ('Location 9', 'Coca-Cola', 30, 1.25, 0.60, 0.65),
+    ('Location 9', 'M&M\'s', 25, 1.75, 0.85, 0.90),
+    ('Location 9', 'Pringles', 18, 1.75, 0.90, 0.85),
+    ('Location 9', 'Skittles', 22, 1.25, 0.60, 0.65),
+    ('Location 9', 'Twix', 12, 1.75, 0.85, 0.90),
+    ('Location 9', 'Pepsi', 28, 1.0, 0.50, 0.50),
+    # Add more items for Location 9...
+
+    ('Location 10', 'Ruffles', 20, 2.25, 1.10, 1.15),
+    ('Location 10', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
+    ('Location 10', 'Fritos', 10, 1.75, 0.85, 0.90),
+    ('Location 10', 'Mountain Dew', 30, 1.25, 0.60, 0.65),
+    ('Location 10', 'Milky Way', 25, 1.75, 0.85, 0.90),
+    ('Location 10', 'Lay\'s', 18, 2.0, 1.0, 1.0),
+    ('Location 10', 'Reese\'s', 22, 1.50, 0.75, 0.75),
+    ('Location 10', 'Dr. Pepper', 15, 1.25, 0.60, 0.65),
+    ('Location 10', 'Twizzlers', 12, 1.0, 0.50, 0.50),
+    # Add more items for Location 10...
 ]
 
 for item in demo_items:
