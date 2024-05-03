@@ -37,17 +37,12 @@ demo_items = [
 ]
 
 for item in demo_items:
-    add_item(*item)
-
-# Function to add items to the inventory
-def add_item(location, name, quantity, price, cost, profit):
-    global location_inventory
-    location_inventory[location] = location_inventory[location].append({
-        'Item Name': name,
-        'Quantity': quantity,
-        'Price': price,
-        'Cost': cost,
-        'Profit': profit
+    location_inventory[item[0]] = location_inventory[item[0]].append({
+        'Item Name': item[1],
+        'Quantity': item[2],
+        'Price': item[3],
+        'Cost': item[4],
+        'Profit': item[5]
     }, ignore_index=True)
 
 # Function to edit item quantity in the inventory
@@ -84,18 +79,6 @@ def location_management():
     st.sidebar.header('Manage Locations')
     selected_location = st.sidebar.selectbox('Select Location', locations)
 
-    st.sidebar.header('Add/Edit Item')
-    item_name = st.sidebar.text_input('Item Name')
-    item_quantity = st.sidebar.number_input('Quantity', min_value=0)
-    item_price = st.sidebar.number_input('Price', min_value=0.0)
-    item_cost = st.sidebar.number_input('Cost', min_value=0.0)
-    item_profit = st.sidebar.number_input('Profit', min_value=0.0)
-
-    if st.sidebar.button('Add Item'):
-        add_item(selected_location, item_name, item_quantity, item_price, item_cost, item_profit)
-        st.success('Item added successfully!')
-
-    st.sidebar.write('---')
     st.sidebar.header('Edit Item Quantity')
     selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
     new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
@@ -124,25 +107,6 @@ def location_management():
 
     profit = calculate_profit(selected_location)
     st.write(f'Profit: ${profit:.2f}')
-
-# Function to add tasks to the to-do list
-def add_task(task):
-    global tasks
-    tasks.append(task)
-
-# Function to delete a task from the to-do list
-def delete_task(task_index):
-    global tasks
-    del tasks[task_index]
-
-# Function to display the to-do list
-def show_tasks():
-    st.write('## To-Do List')
-    for i, task in enumerate(tasks):
-        st.write(f'{i+1}. {task}')
-
-# Adding tasks to the to-do list
-tasks = ['Task 1: Finish project report', 'Task 2: Call client for follow-up', 'Task 3: Attend team meeting']
 
 # Main navigation
 pages = {
