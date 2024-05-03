@@ -125,7 +125,8 @@ for i in range(25):
 
 # Main navigation
 pages = {
-    'Vending Inventory': location_management
+    'Vending Inventory': location_management,
+    'To-Do List': show_tasks
 }
 
 # Display the selected page based on the sidebar selection
