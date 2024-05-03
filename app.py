@@ -8,13 +8,8 @@ location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', '
 # Function to add items to the inventory
 def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
-    location_inventory[location] = location_inventory[location].append({
-        'Item Name': name,
-        'Quantity': quantity,
-        'Price': price,
-        'Cost': cost,
-        'Profit': profit
-    }, ignore_index=True)
+    item_data = {'Item Name': name, 'Quantity': quantity, 'Price': price, 'Cost': cost, 'Profit': profit}
+    location_inventory[location] = location_inventory[location].append(item_data, ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
