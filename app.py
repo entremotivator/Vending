@@ -8,8 +8,13 @@ location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', '
 # Function to add items to the inventory
 def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
-    item_data = {'Item Name': name, 'Quantity': quantity, 'Price': price, 'Cost': cost, 'Profit': profit}
-    location_inventory[location] = location_inventory[location].append(item_data, ignore_index=True)
+    location_inventory[location] = location_inventory[location].append({
+        'Item Name': name,
+        'Quantity': quantity,
+        'Price': price,
+        'Cost': cost,
+        'Profit': profit
+    }, ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
@@ -58,42 +63,33 @@ def location_management():
 
     st.sidebar.write('---')
     st.sidebar.header('Edit Item Quantity')
-    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
-        selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
-        new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
-        if st.sidebar.button('Edit Quantity'):
-            item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == selected_item].index[0]
-            edit_item(selected_location, item_index, new_quantity)
-            st.success('Quantity updated successfully!')
-    else:
-        st.sidebar.warning('No items in inventory.')
+    selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
+    new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
+    if st.sidebar.button('Edit Quantity'):
+        item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == selected_item].index[0]
+        edit_item(selected_location, item_index, new_quantity)
+        st.success('Quantity updated successfully!')
 
     st.sidebar.write('---')
     st.sidebar.header('Delete Item')
-    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
-        item_to_delete = st.sidebar.selectbox('Select Item to Delete', location_inventory[selected_location]['Item Name'].tolist())
-        if st.sidebar.button('Delete Item'):
-            item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == item_to_delete].index[0]
-            delete_item(selected_location, item_index)
-            st.success('Item deleted successfully!')
-    else:
-        st.sidebar.warning('No items in inventory.')
+    item_to_delete = st.sidebar.selectbox('Select Item to Delete', location_inventory[selected_location]['Item Name'].tolist())
+    if st.sidebar.button('Delete Item'):
+        item_index = location_inventory[selected_location][location_inventory[selected_location]['Item Name'] == item_to_delete].index[0]
+        delete_item(selected_location, item_index)
+        st.success('Item deleted successfully!')
 
     # Main section to display inventory, revenue, cost, and profit
     st.header(f'{selected_location} Inventory')
-    if location_inventory[selected_location] is not None and not location_inventory[selected_location].empty:
-        show_inventory(selected_location)
+    show_inventory(selected_location)
 
-        revenue = calculate_revenue(selected_location)
-        st.write(f'Revenue: ${revenue:.2f}')
+    revenue = calculate_revenue(selected_location)
+    st.write(f'Revenue: ${revenue:.2f}')
 
-        cost = calculate_cost(selected_location)
-        st.write(f'Cost: ${cost:.2f}')
+    cost = calculate_cost(selected_location)
+    st.write(f'Cost: ${cost:.2f}')
 
-        profit = calculate_profit(selected_location)
-        st.write(f'Profit: ${profit:.2f}')
-    else:
-        st.warning('No items in inventory.')
+    profit = calculate_profit(selected_location)
+    st.write(f'Profit: ${profit:.2f}')
 
 # Function to add tasks to the to-do list
 def add_task(task):
@@ -114,14 +110,9 @@ def show_tasks():
 # Adding tasks to the to-do list
 tasks = ['Task 1: Finish project report', 'Task 2: Call client for follow-up', 'Task 3: Attend team meeting']
 
-# Adding 25 product examples to the inventory
-for i in range(25):
-    add_item('Location 1', f'Product {i + 1}', 100, 10.0, 7.0, 3.0)
-
 # Main navigation
 pages = {
-    'Vending Inventory': location_management,
-    'To-Do List': show_tasks
+    'Vending Inventory': location_management
 }
 
 # Display the selected page based on the sidebar selection
