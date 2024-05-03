@@ -5,17 +5,6 @@ import pandas as pd
 locations = ['Location 1', 'Location 2', 'Location 3']
 location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
-# Function to add items to the inventory
-def add_item(location, name, quantity, price, cost, profit):
-    global location_inventory
-    location_inventory[location] = location_inventory[location].append({
-        'Item Name': name,
-        'Quantity': quantity,
-        'Price': price,
-        'Cost': cost,
-        'Profit': profit
-    }, ignore_index=True)
-
 # Add real candy and snacks items to demo inventory
 demo_items = [
     ('Location 1', 'Kit Kat', 20, 1.5, 0.75, 0.75),
@@ -49,6 +38,17 @@ demo_items = [
 
 for item in demo_items:
     add_item(*item)
+
+# Function to add items to the inventory
+def add_item(location, name, quantity, price, cost, profit):
+    global location_inventory
+    location_inventory[location] = location_inventory[location].append({
+        'Item Name': name,
+        'Quantity': quantity,
+        'Price': price,
+        'Cost': cost,
+        'Profit': profit
+    }, ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
