@@ -5,7 +5,7 @@ import pandas as pd
 locations = ['Location 1', 'Location 2', 'Location 3']
 location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
-# Add real candy and snacks items to demo inventory
+# Demo inventory items
 demo_items = [
     ('Location 1', 'Kit Kat', 20, 1.5, 0.75, 0.75),
     ('Location 1', 'Doritos', 15, 2.0, 1.0, 1.0),
@@ -38,6 +38,17 @@ demo_items = [
 
 for item in demo_items:
     location_inventory[item[0]] = location_inventory[item[0]].append(pd.Series(item, index=location_inventory[item[0]].columns), ignore_index=True)
+
+# Function to add items to the inventory
+def add_item(location, name, quantity, price, cost, profit):
+    global location_inventory
+    location_inventory[location] = location_inventory[location].append({
+        'Item Name': name,
+        'Quantity': quantity,
+        'Price': price,
+        'Cost': cost,
+        'Profit': profit
+    }, ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
@@ -73,6 +84,18 @@ def location_management():
     st.sidebar.header('Manage Locations')
     selected_location = st.sidebar.selectbox('Select Location', locations)
 
+    st.sidebar.header('Add/Edit Item')
+    item_name = st.sidebar.text_input('Item Name')
+    item_quantity = st.sidebar.number_input('Quantity', min_value=0)
+    item_price = st.sidebar.number_input('Price', min_value=0.0)
+    item_cost = st.sidebar.number_input('Cost', min_value=0.0)
+    item_profit = st.sidebar.number_input('Profit', min_value=0.0)
+
+    if st.sidebar.button('Add Item'):
+        add_item(selected_location, item_name, item_quantity, item_price, item_cost, item_profit)
+        st.success('Item added successfully!')
+
+    st.sidebar.write('---')
     st.sidebar.header('Edit Item Quantity')
     selected_item = st.sidebar.selectbox('Select Item', location_inventory[selected_location]['Item Name'].tolist())
     new_quantity = st.sidebar.number_input('New Quantity', min_value=0)
@@ -101,6 +124,25 @@ def location_management():
 
     profit = calculate_profit(selected_location)
     st.write(f'Profit: ${profit:.2f}')
+
+# Function to add tasks to the to-do list
+def add_task(task):
+    global tasks
+    tasks.append(task)
+
+# Function to delete a task from the to-do list
+def delete_task(task_index):
+    global tasks
+    del tasks[task_index]
+
+# Function to display the to-do list
+def show_tasks():
+    st.write('## To-Do List')
+    for i, task in enumerate(tasks):
+        st.write(f'{i+1}. {task}')
+
+# Adding tasks to the to-do list
+tasks = ['Task 1: Finish project report', 'Task 2: Call client for follow-up', 'Task 3: Attend team meeting']
 
 # Main navigation
 pages = {
