@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Create a DataFrame to store vending inventory for multiple locations
-locations = ['Location 1', 'Location 2', 'Location 3']
+locations = ['Location 1', 'Location 2', 'Location 3', 'Location 4', 'Location 5', 'Location 6', 'Location 7', 'Location 8', 'Location 9', 'Location 10']
 location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
 # Demo inventory items
