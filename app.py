@@ -37,13 +37,7 @@ demo_items = [
 ]
 
 for item in demo_items:
-    location_inventory[item[0]] = location_inventory[item[0]].append({
-        'Item Name': item[1],
-        'Quantity': item[2],
-        'Price': item[3],
-        'Cost': item[4],
-        'Profit': item[5]
-    }, ignore_index=True)
+    location_inventory[item[0]] = location_inventory[item[0]].append(pd.Series(item, index=location_inventory[item[0]].columns), ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
