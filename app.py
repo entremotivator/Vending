@@ -37,18 +37,26 @@ demo_items = [
 ]
 
 for item in demo_items:
-    location_inventory[item[0]] = location_inventory[item[0]].append(pd.Series(item, index=location_inventory[item[0]].columns), ignore_index=True)
+    item_dict = {
+        'Item Name': item[1],
+        'Quantity': item[2],
+        'Price': item[3],
+        'Cost': item[4],
+        'Profit': item[5]
+    }
+    location_inventory[item[0]] = pd.concat([location_inventory[item[0]], pd.DataFrame([item_dict])], ignore_index=True)
 
 # Function to add items to the inventory
 def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
-    location_inventory[location] = location_inventory[location].append({
+    item_dict = {
         'Item Name': name,
         'Quantity': quantity,
         'Price': price,
         'Cost': cost,
         'Profit': profit
-    }, ignore_index=True)
+    }
+    location_inventory[location] = pd.concat([location_inventory[location], pd.DataFrame([item_dict])], ignore_index=True)
 
 # Function to edit item quantity in the inventory
 def edit_item(location, item_index, new_quantity):
