@@ -5,25 +5,6 @@ import pandas as pd
 locations = ['Location 1', 'Location 2', 'Location 3', 'Location 4', 'Location 5', 'Location 6', 'Location 7', 'Location 8', 'Location 9', 'Location 10']
 location_inventory = {location: pd.DataFrame(columns=['Item Name', 'Quantity', 'Price', 'Cost', 'Profit']) for location in locations}
 
-snacks = [
-    'Kit Kat', 'Doritos', 'Snickers', 'Coca-Cola', 'M&M\'s', 'Pringles', 'Skittles', 'Twix', 'Pepsi',
-    'Ruffles', 'Hershey\'s Bar', 'Fritos', 'Mountain Dew', 'Milky Way', 'Lay\'s', 'Reese\'s', 'Dr. Pepper', 'Twizzlers',
-    'Cheetos', 'Mars Bar', 'Sprite', 'Nestle Crunch', 'Gummy Bears', 'Sun Chips', 'Butterfinger', 'Fanta', 'Starburst',
-    'Snapple', 'Oreo', '7UP', 'Hershey\'s Kisses'
-]
-
-# Generate demo_items for all locations
-demo_items = []
-for location in locations:
-    for snack in snacks:
-        demo_items.append((location, snack, 20, 1.5, 0.75, 0.75))  # You can adjust the quantities and prices as needed
-
-# Displaying the first few items for Location 1 as an example
-for item in demo_items:
-    if item[0] == 'Location 1':
-        print(item)
-    else:
-        break  # To avoid printing all items for brevity
 # Function to add items to the inventory
 def add_item(location, name, quantity, price, cost, profit):
     global location_inventory
@@ -111,24 +92,19 @@ def location_management():
     profit = calculate_profit(selected_location)
     st.write(f'Profit: ${profit:.2f}')
 
-# Function to add tasks to the to-do list
-def add_task(task):
-    global tasks
-    tasks.append(task)
+# Initialize inventory with demo items
+demo_items = [
+    ('Location 1', 'Kit Kat', 20, 1.5, 0.75, 0.75),
+    ('Location 1', 'Doritos', 15, 2.0, 1.0, 1.0),
+    # Add more items for Location 1...
+    ('Location 2', 'Ruffles', 20, 2.25, 1.10, 1.15),
+    ('Location 2', 'Hershey\'s Bar', 16, 1.85, 0.90, 0.95),
+    # Add more items for Location 2...
+    # Repeat for other locations...
+]
 
-# Function to delete a task from the to-do list
-def delete_task(task_index):
-    global tasks
-    del tasks[task_index]
-
-# Function to display the to-do list
-def show_tasks():
-    st.write('## To-Do List')
-    for i, task in enumerate(tasks):
-        st.write(f'{i+1}. {task}')
-
-# Adding tasks to the to-do list
-tasks = ['Task 1: Finish project report', 'Task 2: Call client for follow-up', 'Task 3: Attend team meeting']
+for item in demo_items:
+    add_item(item[0], item[1], item[2], item[3], item[4], item[5])
 
 # Main navigation
 pages = {
