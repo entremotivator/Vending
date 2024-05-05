@@ -1,17 +1,19 @@
 import streamlit as st
 import pandas as pd
 
-# Create a function to calculate the difference, cash owed, total credit, tip, and gratuity
+# Create a function to calculate the difference, cash owed, total credit, tip, bartender's tip, and house amount
 def calculate_values(total_cash, payments, gratuity):
     difference = total_cash - payments - gratuity
     cash_owed = payments - total_cash if payments > total_cash else 0
     total_credit = total_cash + cash_owed
     tip = gratuity - cash_owed if gratuity > cash_owed else 0
-    return difference, cash_owed, total_credit, tip
+    bartender_tip = total_cash * 0.15
+    house_amount = total_cash * 0.05
+    return difference, cash_owed, total_credit, tip, bartender_tip, house_amount
 
 # Create a function to display the form and calculate values
 def pretty_plates_cash_log():
-    st.title('Pretti Plates Bar Cash Log')
+    st.title('Pretty Plates Bar Cash Log')
     st.markdown("Welcome to the Pretty Plates Bar Cash Log! Please fill out the following details:")
 
     # Define form inputs
@@ -30,7 +32,7 @@ def pretty_plates_cash_log():
 
     # Process form submission
     if submit_button:
-        difference, cash_owed, total_credit, tip = calculate_values(total_cash, payments, gratuity)
+        difference, cash_owed, total_credit, tip, bartender_tip, house_amount = calculate_values(total_cash, payments, gratuity)
 
         # Display calculations
         st.markdown("### Calculated Values")
@@ -38,12 +40,15 @@ def pretty_plates_cash_log():
         st.write(f'**Cash Owed:** ${cash_owed:.2f}')
         st.write(f'**Total Credit:** ${total_credit:.2f}')
         st.write(f'**Tip:** ${tip:.2f}')
+        st.write(f'**Bartender\'s Tip:** ${bartender_tip:.2f}')
+        st.write(f'**House Amount:** ${house_amount:.2f}')
 
         # Save data to a DataFrame
         data = {'Name': [name], 'Date': [date], 'Job': [job], 'Shift': [shift],
                 'Total Cash': [total_cash], 'Payments': [payments], 'Gratuity': [gratuity],
                 'Difference': [difference], 'Cash Owed': [cash_owed],
-                'Total Credit': [total_credit], 'Tip': [tip]}
+                'Total Credit': [total_credit], 'Tip': [tip],
+                'Bartender\'s Tip': [bartender_tip], 'House Amount': [house_amount]}
         df = pd.DataFrame(data)
         
         st.markdown("### Cash Log Details")
