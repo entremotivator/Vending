@@ -7,7 +7,7 @@ def calculate_difference(total_cash, payments, gratuity):
 
 # Create a function to display the form and calculate the difference
 def pretty_plates_cash_log():
-    st.title('Pretty Plates Bar Cash Log')
+    st.title('Pretti Plates Bar Cash Log')
     st.markdown("Welcome to the Pretty Plates Bar Cash Log! Please fill out the following details:")
 
     # Define form inputs
